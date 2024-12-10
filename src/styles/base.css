@@ -1,9 +1,6 @@
 @import '@fontsource/open-sans/400.css';
 @import '@fontsource/open-sans/600.css';
 @import '@fontsource/open-sans/700.css';
-@import '@fontsource/roboto/400.css';
-@import '@fontsource/roboto/500.css';
-@import '@fontsource/roboto/700.css';
 @import '@fontsource/playfair-display/700.css';
 
 @tailwind base;
@@ -51,23 +48,40 @@ body {
   @apply text-text-secondary leading-relaxed;
 }
 
-/* Animations */
-[data-aos] {
-  @apply opacity-0 transform translate-y-4;
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-[data-aos].aos-animate {
-  @apply opacity-100 translate-y-0;
-}
-
 /* Mobile optimizations */
 @media (max-width: 640px) {
   html {
     font-size: 14px;
   }
   
+  h1 {
+    @apply text-3xl;
+  }
+  
+  h2 {
+    @apply text-2xl;
+  }
+  
   .container {
     @apply px-4;
   }
+  
+  .prose {
+    @apply text-base;
+  }
+}
+
+/* Color mode dropdown */
+#color-mode-dropdown {
+  @apply transform opacity-0 scale-95 invisible;
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0.2s;
+}
+
+#color-mode-dropdown.visible {
+  @apply opacity-100 scale-100 visible;
+}
+
+/* Ensure text remains visible during webfont load */
+.font-display {
+  font-display: swap;
 }

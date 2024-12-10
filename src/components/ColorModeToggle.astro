@@ -2,7 +2,7 @@
 import { COLOR_MODES } from '../utils/colorModes';
 ---
 
-<div class="relative group" id="color-mode-container">
+<div class="relative group z-50" id="color-mode-container">
   <button
     id="color-mode-trigger"
     class="p-2 rounded-lg hover:bg-surface/80 transition-all duration-300 flex items-center gap-2"
@@ -14,10 +14,11 @@ import { COLOR_MODES } from '../utils/colorModes';
 
   <div
     id="color-mode-dropdown"
-    class="absolute right-0 top-full mt-2 z-50 bg-surface rounded-lg shadow-lg border border-accent-primary/20 backdrop-blur-sm hidden"
+    class="absolute right-0 top-full mt-2 w-48 bg-surface rounded-lg shadow-lg border border-accent-primary/20 backdrop-blur-sm"
+    style="display: none;"
   >
     <div class="p-2">
-      <div class="flex flex-col gap-1 min-w-[10rem]">
+      <div class="flex flex-col gap-1">
         {Object.entries(COLOR_MODES).map(([mode, theme]) => (
           <button
             class="w-full px-3 py-2 text-sm flex items-center gap-2 rounded-md hover:bg-accent-primary/10 transition-colors"
@@ -33,46 +34,33 @@ import { COLOR_MODES } from '../utils/colorModes';
 </div>
 
 <script>
-  async function initColorModeToggle() {
-    const container = document.getElementById('color-mode-container');
-    const trigger = document.getElementById('color-mode-trigger');
-    const dropdown = document.getElementById('color-mode-dropdown');
-    
-    if (trigger && dropdown) {
-      // Show/hide dropdown
-      trigger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        dropdown.classList.toggle('hidden');
-      });
-
-      // Close dropdown when clicking outside
-      document.addEventListener('click', (e) => {
-        if (!container?.contains(e.target as Node)) {
-          dropdown.classList.add('hidden');
-        }
-      });
-
-      // Handle theme selection
-      dropdown.addEventListener('click', async (e) => {
-        const button = (e.target as HTMLElement).closest('button');
-        if (!button) return;
-        
-        const mode = button.dataset.mode;
-        if (mode) {
-          const { setColorMode } = await import('../utils/colorModes');
-          setColorMode(mode);
-          dropdown.classList.add('hidden');
-        }
-      });
-    }
-  }
-
-  // Initialize when the DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      initColorModeToggle().catch(console.error);
+  const container = document.getElementById('color-mode-container');
+  const trigger = document.getElementById('color-mode-trigger');
+  const dropdown = document.getElementById('color-mode-dropdown');
+  
+  if (trigger && dropdown) {
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isVisible = dropdown.style.display === 'block';
+      dropdown.style.display = isVisible ? 'none' : 'block';
     });
-  } else {
-    initColorModeToggle().catch(console.error);
+
+    document.addEventListener('click', (e) => {
+      if (!container?.contains(e.target as Node)) {
+        dropdown.style.display = 'none';
+      }
+    });
+
+    dropdown.addEventListener('click', async (e) => {
+      const button = (e.target as HTMLElement).closest('button');
+      if (!button) return;
+      
+      const mode = button.dataset.mode;
+      if (mode) {
+        const { setColorMode } = await import('../utils/colorModes');
+        setColorMode(mode);
+        dropdown.style.display = 'none';
+      }
+    });
   }
 </script>
