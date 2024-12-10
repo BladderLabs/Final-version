@@ -1,0 +1,45 @@
+---
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/700.css';
+import '@fontsource/playfair-display/700.css';
+import { getStoredColorMode } from '../utils/colorModes';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description || "Muhammad Umar Naveed's Personal Blog"} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
+  <body class="bg-bg-primary text-text-primary transition-colors duration-300">
+    <slot />
+    
+    <script>
+      async function initColorMode() {
+        const { getStoredColorMode, setColorMode } = await import('../utils/colorModes');
+        const initialMode = getStoredColorMode();
+        setColorMode(initialMode);
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          initColorMode().catch(console.error);
+        });
+      } else {
+        initColorMode().catch(console.error);
+      }
+    </script>
+  </body>
+</html>

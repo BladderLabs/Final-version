@@ -1,0 +1,31 @@
+---
+---
+<div 
+  id="toggle-message" 
+  class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 opacity-0 pointer-events-none"
+>
+  <div class="bg-surface p-6 rounded-xl shadow-xl border border-accent-primary/20 backdrop-blur-lg max-w-md text-center transform transition-all duration-500">
+    <h3 class="text-xl font-display mb-3 bg-gradient-to-r from-accent-primary to-accent-secondary bg-clip-text text-transparent">
+      Customize Your Reading Experience
+    </h3>
+    <p class="text-text-secondary mb-4">
+      Switch to your perfect reading mode for maximum comfort and focus.
+    </p>
+    <div id="toggle-placeholder" class="mb-4"></div>
+    <p class="text-sm text-text-secondary/80 italic">
+      Your comfort, your choice
+    </p>
+  </div>
+</div>
+
+<style>
+  @keyframes messageFloat {
+    0%, 100% { transform: translate(-50%, -50%); }
+    50% { transform: translate(-50%, -52%); }
+  }
+
+  #toggle-message {
+    animation: messageFloat 3s ease-in-out infinite;
+    will-change: transform;
+  }
+</style>

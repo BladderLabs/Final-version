@@ -1,0 +1,131 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+publish_mode: editorial_workflow
+local_backend: true
+
+editor:
+  preview: true
+
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "src/content/posts"
+    create: true
+    slug: "{{slug}}"
+    preview_path: "{{category}}/{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Excerpt", name: "excerpt", widget: "text"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Category", name: "category", widget: "select", options: ["learn", "books"]}
+      - {label: "Cover Image", name: "coverImage", widget: "image"}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      - {label: "Tags", name: "tags", widget: "list", default: []}
+      - {label: "Author", name: "author", widget: "string", default: "Muhammad Umar Naveed"}
+      - {label: "Reading Time", name: "readingTime", widget: "number", value_type: "int", min: 1}
+      - {label: "Body", name: "body", widget: "markdown", buttons: ["bold", "italic", "code", "link", "heading-one", "heading-two", "heading-three", "quote", "bulleted-list", "numbered-list"]}
+
+  - name: "pages"
+    label: "Pages"
+    files:
+      - name: "home"
+        label: "Home Page"
+        file: "src/content/pages/home.md"
+        fields:
+          - {label: "Hero Title", name: "heroTitle", widget: "string"}
+          - {label: "Hero Subtitle", name: "heroSubtitle", widget: "text"}
+          - label: "Hero Buttons"
+            name: "heroButtons"
+            widget: "list"
+            fields:
+              - {label: "Text", name: "text", widget: "string"}
+              - {label: "Link", name: "link", widget: "string"}
+              - {label: "Style", name: "style", widget: "select", options: ["primary", "secondary"]}
+          - {label: "Featured Section Title", name: "featuredTitle", widget: "string"}
+          - {label: "Email Subscribe Title", name: "subscribeTitle", widget: "string"}
+          - {label: "Email Subscribe Text", name: "subscribeText", widget: "text"}
+          - label: "SEO"
+            name: "seo"
+            widget: "object"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Description", name: "description", widget: "text"}
+              - {label: "Keywords", name: "keywords", widget: "list"}
+
+  - name: "navigation"
+    label: "Navigation"
+    files:
+      - name: "main-nav"
+        label: "Main Navigation"
+        file: "src/content/navigation/main.json"
+        fields:
+          - label: "Navigation Items"
+            name: "items"
+            widget: "list"
+            fields:
+              - {label: "Label", name: "label", widget: "string"}
+              - {label: "Link", name: "href", widget: "string"}
+              - {label: "Icon", name: "icon", widget: "string", required: false}
+              - label: "Submenu"
+                name: "submenu"
+                widget: "list"
+                required: false
+                fields:
+                  - {label: "Label", name: "label", widget: "string"}
+                  - {label: "Link", name: "href", widget: "string"}
+
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - name: "general"
+        label: "General Settings"
+        file: "src/content/settings/general.json"
+        fields:
+          - {label: "Site Title", name: "title", widget: "string"}
+          - {label: "Site Description", name: "description", widget: "text"}
+          - {label: "Logo Text", name: "logoText", widget: "string"}
+          - label: "Theme Settings"
+            name: "theme"
+            widget: "object"
+            fields:
+              - {label: "Primary Color", name: "primaryColor", widget: "color"}
+              - {label: "Secondary Color", name: "secondaryColor", widget: "color"}
+              - {label: "Accent Color", name: "accentColor", widget: "color"}
+              - {label: "Background Color", name: "backgroundColor", widget: "color"}
+          - label: "Social Links"
+            name: "social"
+            widget: "object"
+            fields:
+              - {label: "Twitter URL", name: "twitter", widget: "string"}
+              - {label: "GitHub URL", name: "github", widget: "string"}
+              - {label: "LinkedIn URL", name: "linkedin", widget: "string"}
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            fields:
+              - {label: "Copyright Text", name: "copyright", widget: "string"}
+              - label: "Footer Links"
+                name: "links"
+                widget: "list"
+                fields:
+                  - {label: "Label", name: "label", widget: "string"}
+                  - {label: "URL", name: "url", widget: "string"}
+
+  - name: "books"
+    label: "Book Reviews"
+    folder: "src/content/books"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Author", name: "bookAuthor", widget: "string"}
+      - {label: "Rating", name: "rating", widget: "number", value_type: "float", min: 0, max: 5, step: 0.5}
+      - {label: "Cover Image", name: "coverImage", widget: "image"}
+      - {label: "Review", name: "body", widget: "markdown"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Tags", name: "tags", widget: "list"}
+      - {label: "Recommended", name: "recommended", widget: "boolean", default: false}

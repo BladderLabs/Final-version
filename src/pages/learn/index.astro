@@ -1,0 +1,64 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import ScrollProgress from '../../components/ScrollProgress.astro';
+import { getCollection } from 'astro:content';
+
+const learningPosts = await getCollection('posts', ({ data }) => {
+  return data.category === 'learn';
+});
+
+const sortedPosts = learningPosts.sort((a, b) => 
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<Layout title="Let's Learn - Muhammad Umar Naveed">
+  <ScrollProgress />
+  <Header />
+  <main class="pt-24 min-h-screen bg-gradient-to-b from-bg-secondary to-bg-primary">
+    <div class="container mx-auto px-4">
+      <h1 class="text-4xl md:text-6xl font-display mb-8 fade-in">
+        Let's <span class="text-accent-primary">Learn</span> Together
+      </h1>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-list">
+        {sortedPosts.map((post) => (
+          <article class="card-3d bg-surface rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300">
+            {post.data.coverImage && (
+              <div class="relative overflow-hidden h-48">
+                <img 
+                  src={post.data.coverImage} 
+                  alt={post.data.title} 
+                  class="parallax-image w-full h-full object-cover"
+                />
+              </div>
+            )}
+            <div class="p-6">
+              <h3 class="text-xl font-display mb-3 text-text-primary">
+                {post.data.title}
+              </h3>
+              <p class="text-text-secondary mb-4">
+                {post.data.excerpt}
+              </p>
+              <a 
+                href={`/learn/${post.slug}`}
+                class="text-accent-secondary hover:text-accent-primary transition-colors"
+              >
+                Read more →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  import { initScrollAnimations } from '../../utils/scrollAnimations';
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    initScrollAnimations();
+  });
+</script>

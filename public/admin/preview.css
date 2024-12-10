@@ -1,0 +1,24 @@
+/* Add your preview styles here */
+.preview-panel {
+  font-family: 'Inter', sans-serif;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.preview-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.preview-content {
+  line-height: 1.6;
+}
+
+.preview-image {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+  border-radius: 8px;
+}

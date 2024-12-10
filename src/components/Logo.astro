@@ -1,0 +1,36 @@
+---
+---
+<div class="flex items-center space-x-3">
+  <div class="relative w-12 h-12">
+    <!-- Decorative elements -->
+    <div class="absolute inset-0 bg-gradient-to-br from-accent-primary/20 to-accent-secondary/20 rounded-xl transform rotate-6 transition-transform group-hover:rotate-12"></div>
+    <div class="absolute inset-0 bg-gradient-to-tr from-accent-secondary/20 to-accent-primary/20 rounded-xl transform -rotate-6 transition-transform group-hover:-rotate-12"></div>
+    
+    <!-- Main logo container -->
+    <div class="absolute inset-0 flex items-center justify-center bg-surface rounded-xl border border-accent-primary/20 backdrop-blur-sm">
+      <!-- Monogram -->
+      <div class="relative">
+        <span class="font-display text-2xl bg-gradient-to-r from-accent-primary to-accent-secondary bg-clip-text text-transparent">
+          MUN
+        </span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Full name -->
+  <div class="hidden md:block">
+    <h1 class="font-display text-lg tracking-wide">
+      <span class="text-text-primary">Muhammad</span>
+      <span class="text-accent-primary">Umar</span>
+      <span class="text-text-primary">Naveed</span>
+    </h1>
+  </div>
+</div>
+
+<style>
+  .logo-gradient {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>

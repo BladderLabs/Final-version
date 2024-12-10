@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import FeaturedPosts from '../components/FeaturedPosts.astro';
+import Footer from '../components/Footer.astro';
+import ScrollProgress from '../components/ScrollProgress.astro';
+import { setColorMode } from '../utils/colorModes';
+
+// Force default theme on landing page
+setColorMode('default');
+
+const featuredPosts = [
+  {
+    title: "The Art of Mindful Coding",
+    slug: "mindful-coding",
+    excerpt: "Discover how mindfulness can improve your coding practice and problem-solving abilities.",
+    date: "2024-01-20",
+    category: "learn",
+    coverImage: "/images/mindful-coding.jpg"
+  },
+  {
+    title: "Deep Work by Cal Newport",
+    slug: "deep-work",
+    excerpt: "A comprehensive review of how to achieve peak productivity in an increasingly distracted world.",
+    date: "2024-01-18",
+    category: "books",
+    coverImage: "/images/deep-work.jpg"
+  },
+  {
+    title: "Building Better Habits",
+    slug: "better-habits",
+    excerpt: "Learn the science behind habit formation and how to leverage it for personal growth.",
+    date: "2024-01-15",
+    category: "learn",
+    coverImage: "/images/habits.jpg"
+  }
+];
+---
+
+<Layout title="Muhammad Umar Naveed - Personal Blog">
+  <ScrollProgress />
+  <Header isLandingPage={true} />
+  <main>
+    <Hero />
+    <FeaturedPosts posts={featuredPosts} />
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  import { setColorMode } from '../utils/colorModes';
+  
+  // Ensure default theme on landing page
+  document.addEventListener('DOMContentLoaded', () => {
+    setColorMode('default');
+  });
+</script>

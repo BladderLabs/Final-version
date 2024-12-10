@@ -1,0 +1,64 @@
+---
+import type { Post } from '../types';
+
+interface Props {
+  posts: Post[];
+}
+
+const { posts } = Astro.props;
+---
+
+<section class="py-20 bg-gradient-to-b from-bg-secondary to-bg-primary">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-display mb-12 text-center fade-in">
+      Featured <span class="text-accent-primary">Insights</span>
+    </h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-list">
+      {posts.map((post) => (
+        <a 
+          href={`/${post.category}/${post.slug}`}
+          class="group"
+        >
+          <article class="card-3d bg-surface rounded-lg overflow-hidden shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-2xl h-full">
+            {post.coverImage && (
+              <div class="relative overflow-hidden h-48">
+                <img 
+                  src={post.coverImage} 
+                  alt={post.title} 
+                  class="parallax-image w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </div>
+            )}
+            <div class="p-6">
+              <span class="text-highlight text-sm uppercase tracking-wider">
+                {post.category}
+              </span>
+              <h3 class="text-xl font-display mt-2 mb-3 text-text-primary group-hover:text-accent-primary transition-colors duration-300">
+                {post.title}
+              </h3>
+              <p class="text-text-secondary mb-4">
+                {post.excerpt}
+              </p>
+              <span class="inline-flex items-center text-accent-secondary group-hover:text-accent-primary transition-colors duration-300">
+                Read more 
+                <svg class="w-4 h-4 ml-1 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </span>
+            </div>
+          </article>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initScrollAnimations } from '../utils/scrollAnimations';
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    initScrollAnimations();
+  });
+</script>

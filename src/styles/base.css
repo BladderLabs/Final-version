@@ -1,0 +1,73 @@
+@import '@fontsource/open-sans/400.css';
+@import '@fontsource/open-sans/600.css';
+@import '@fontsource/open-sans/700.css';
+@import '@fontsource/roboto/400.css';
+@import '@fontsource/roboto/500.css';
+@import '@fontsource/roboto/700.css';
+@import '@fontsource/playfair-display/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #F8F9FA;
+  --color-accent-primary: #4A90E2;
+  --color-accent-secondary: #2D9CDB;
+  --color-text-primary: #2D3748;
+  --color-text-secondary: #4A5568;
+  --color-surface: #FFFFFF;
+}
+
+.dark {
+  --color-bg-primary: #1A202C;
+  --color-bg-secondary: #2D3748;
+  --color-text-primary: #F7FAFC;
+  --color-text-secondary: #CBD5E0;
+  --color-surface: #2D3748;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-sans text-text-primary bg-bg-primary;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.prose {
+  @apply max-w-none;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  @apply font-display text-text-primary;
+}
+
+.prose p {
+  @apply text-text-secondary leading-relaxed;
+}
+
+/* Animations */
+[data-aos] {
+  @apply opacity-0 transform translate-y-4;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+[data-aos].aos-animate {
+  @apply opacity-100 translate-y-0;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+  
+  .container {
+    @apply px-4;
+  }
+}

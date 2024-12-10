@@ -1,0 +1,62 @@
+---
+import { navigationItems } from '../config/navigation';
+---
+
+<div
+  id="mobile-nav"
+  class="fixed inset-0 bg-bg-primary/95 backdrop-blur-lg transform translate-x-full transition-transform duration-300 z-50 md:hidden"
+>
+  <div class="h-full flex flex-col">
+    <div class="flex justify-end p-6">
+      <button
+        id="close-nav"
+        class="text-text-primary hover:text-accent-primary transition-colors"
+        aria-label="Close navigation"
+      >
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    
+    <nav class="flex-1 flex flex-col items-center justify-center space-y-8">
+      {navigationItems.map(item => (
+        <a
+          href={item.href}
+          class="text-2xl font-display text-text-primary hover:text-accent-primary transition-colors"
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</div>
+
+<button
+  id="open-nav"
+  class="md:hidden fixed top-4 right-4 z-40 p-2 rounded-lg bg-surface/80 backdrop-blur-sm"
+  aria-label="Open navigation"
+>
+  <svg class="w-6 h-6 text-text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+  </svg>
+</button>
+
+<script>
+const mobileNav = document.getElementById('mobile-nav');
+const openNav = document.getElementById('open-nav');
+const closeNav = document.getElementById('close-nav');
+
+const toggleNav = () => {
+  mobileNav?.classList.toggle('translate-x-full');
+  document.body.classList.toggle('overflow-hidden');
+};
+
+openNav?.addEventListener('click', toggleNav);
+closeNav?.addEventListener('click', toggleNav);
+
+// Close nav when clicking on a link
+mobileNav?.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', toggleNav);
+});
+</script>
